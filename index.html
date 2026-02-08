@@ -147,6 +147,11 @@
                                 class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
                             <span class="text-gray-700 font-medium">طالبات</span>
                         </label>
+                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
+                            <input type="radio" name="gender" value="مشترك" required
+                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
+                            <span class="text-gray-700 font-medium">مشترك</span>
+                        </label>
                     </div>
                 </div>
 
@@ -221,7 +226,8 @@
                                 class="custom-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
                                 onchange="toggleCountInput(this, 'countSlides')">
                             <label for="checkSlides"
-                                class="text-sm font-medium text-gray-700 cursor-pointer select-none">عرض تقديمي</label>
+                                class="text-sm font-medium text-gray-700 cursor-pointer select-none">عرض تقديمي أو
+                                نص</label>
                             <input type="number" id="countSlides" name="materialSlidesCount" placeholder="العدد"
                                 disabled min="0"
                                 class="w-full p-2 text-sm border border-gray-300 rounded disabled:bg-gray-100 transition focus:ring-green-500 focus:border-green-500">
