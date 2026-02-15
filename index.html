@@ -4,684 +4,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج متابعة سير محاضرات كليات الجامعة</title>
-    <!-- تحميل Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- خطوط عربية -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
-
+    <title>الصفحة الرئيسية - لوحة المعلومات</title>
+    <!-- Google Fonts for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --background-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Cairo', 'Inter', sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
         }
 
-        /* تحسين مظهر الحقول عند التركيز */
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline-color: #10B981;
-            border-color: #10B981 !important;
-            box-shadow: 0 0 0 2px #A7F3D0;
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+            text-align: center;
         }
 
-        /* ألوان العناصر المختارة */
-        .custom-checkbox:checked,
-        .custom-radio:checked {
-            background-color: #059669;
-            border-color: #059669;
+        .header {
+            margin-bottom: 3rem;
         }
 
-        .custom-radio:checked:after {
-            background-color: white;
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
         }
 
-        /* تأثيرات الانتقال */
-        #message-box {
-            transition: all 0.3s ease-in-out;
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        p.subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            justify-content: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .menu-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon-wrapper {
+            background-color: #eff6ff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-card:hover .icon-wrapper {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .card-desc {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 4rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* SVG Icons */
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+    <div class="container">
 
-        <!-- صندوق الرسائل -->
-        <div id="message-box" class="hidden p-4 mb-4 rounded-lg text-white text-center shadow-md"></div>
+        <header class="header">
+            <!-- Ensure csitlogo.png is in the same directory -->
+            <img src="csitlogo.png" alt="CSIT Logo" class="logo" onerror="this.style.display='none'">
+            <h1>نظام إدارة الكلية</h1>
+            <p class="subtitle">كلية علوم الحاسوب وتقانة المعلومات</p>
+        </header>
 
-        <form id="lectureForm" class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
-
-            <!-- رأس الصفحة -->
-            <div class="mb-6 flex flex-row items-center justify-between border-b pb-4 border-gray-100 gap-4">
-                <div class="flex items-center gap-4 w-full">
-                    <img src="csitlogo.png" alt="شعار الكلية" class="w-16 md:w-24 h-auto object-contain">
-                    <div class="text-right flex-1">
-                        <h1 class="text-lg md:text-2xl font-bold text-green-800 leading-tight">نموذج متابعة سير محاضرات
-                            كليات الجامعة</h1>
-                        <p class="text-gray-500 text-xs md:text-sm mt-1">الحقول المؤشر عليها بـ <span
-                                class="text-red-500">*</span> إجبارية</p>
-                    </div>
+        <div class="menu-grid">
+            <!-- Link to Entry Form -->
+            <a href="EntryForm.html" class="menu-card">
+                <div class="icon-wrapper">
+                    <!-- Document Plus Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                 </div>
-            </div>
+                <h2 class="card-title">نموذج الإدخال</h2>
+                <p class="card-desc">إدخال بيانات جديدة وتحديث المعلومات الأكاديمية.</p>
+            </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-
-                <!-- الكلية -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">الكلية <span
-                            class="text-red-500">*</span></label>
-                    <input type="text" name="college" value="كلية علوم الحاسوب وتقانة المعلومات" readonly
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-500 cursor-not-allowed">
+            <!-- Link to Dashboard -->
+            <a href="Dashboard.html" class="menu-card">
+                <div class="icon-wrapper">
+                    <!-- Chart Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
                 </div>
+                <h2 class="card-title">لوحة التحكم</h2>
+                <p class="card-desc">عرض التقارير والإحصائيات والبيانات المدخلة.</p>
+            </a>
+        </div>
 
-                <!-- القسم -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">القسم <span
-                            class="text-red-500">*</span></label>
-                    <select id="department" name="department" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled selected>اختر القسم</option>
-                        <option value="قسم علوم الحاسوب">قسم علوم الحاسوب</option>
-                        <option value="قسم تقانة المعلومات">قسم تقانة المعلومات</option>
-                        <option value="قسم نظم المعلومات">قسم نظم المعلومات</option>
-                    </select>
-                </div>
+        <footer>
+            <p>&copy; 2026 جميع الحقوق محفوظة - كلية علوم الحاسوب وتقانة المعلومات</p>
+        </footer>
 
-                <!-- العام الجامعي -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">العام الجامعي <span
-                            class="text-red-500">*</span></label>
-                    <select id="academicYear" name="academicYear" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled selected>اختر العام</option>
-                        <option value="2023-2024">2023-2024</option>
-                        <option value="2024-2025" selected>2024-2025</option>
-                        <option value="2025-2026">2025-2026</option>
-                    </select>
-                </div>
-
-                <!-- الفصل الدراسي -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">الفصل الدراسي <span
-                            class="text-red-500">*</span></label>
-                    <select id="semester" name="semester" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled>اختر الفصل</option>
-                        <option value="الأول">الأول</option>
-                        <option value="الثاني" selected>الثاني</option>
-                    </select>
-                </div>
-
-                <!-- الفرقة -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">الفرقة <span
-                            class="text-red-500">*</span></label>
-                    <select id="level" name="level" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled selected>اختر الفرقة</option>
-                        <option value="الأولى">الأولى</option>
-                        <option value="الثانية">الثانية</option>
-                        <option value="الثالثة">الثالثة</option>
-                        <option value="الرابعة">الرابعة</option>
-                        <option value="الخامسة">الخامسة</option>
-                    </select>
-                </div>
-
-                <!-- النوع -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">النوع <span
-                            class="text-red-500">*</span></label>
-                    <div
-                        class="flex items-center space-x-4 space-x-reverse mt-1 p-3 border border-gray-300 rounded-lg bg-gray-50">
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="gender" value="طلاب" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-gray-700 font-medium">طلاب</span>
-                        </label>
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="gender" value="طالبات" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-gray-700 font-medium">طالبات</span>
-                        </label>
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="gender" value="مشترك" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-gray-700 font-medium">مشترك</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- رقم الأسبوع -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">رقم الأسبوع الدراسي <span
-                            class="text-red-500">*</span></label>
-                    <select id="weekNumber" name="weekNumber" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled selected>اختر الأسبوع</option>
-                        <script>
-                            for (let i = 1; i <= 14; i++) {
-                                document.write(`<option value="${i}">${i}</option>`);
-                            }
-                        </script>
-                    </select>
-                </div>
-
-                <!-- هل تم التدريس -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">هل تم تدريس المحاضرة؟ <span
-                            class="text-red-500">*</span></label>
-                    <div
-                        class="flex items-center space-x-4 space-x-reverse mt-1 p-3 border border-gray-300 rounded-lg bg-gray-50">
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="isTaught" value="نعم" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-green-700 font-bold">نعم</span>
-                        </label>
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="isTaught" value="لا" required
-                                class="custom-radio w-5 h-5 text-red-600 focus:ring-red-500">
-                            <span class="text-red-700 font-bold">لا</span>
-                        </label>
-                    </div>
-                </div>
-
-                <hr class="md:col-span-2 my-2 border-t border-gray-200">
-
-                <!-- اسم المقرر -->
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">اسم المقرر <span
-                            class="text-red-500">*</span></label>
-                    <select id="courseName" name="courseName" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-green-500 focus:border-green-500">
-                        <option value="" disabled selected>اختر القسم والفرقة والفصل أولاً</option>
-                    </select>
-                </div>
-
-                <!-- مادة التدريس -->
-                <div class="md:col-span-2 bg-green-50 p-5 rounded-xl border border-green-100">
-                    <label class="block text-sm font-bold text-green-900 mb-3">مادة التدريس (اختياري)</label>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                        <!-- فيديو -->
-                        <div
-                            class="flex items-center space-x-3 space-x-reverse bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition">
-                            <input type="checkbox" id="checkVideo" name="materialVideoCheck"
-                                class="custom-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
-                                onchange="toggleCountInput(this, 'countVideo')">
-                            <label for="checkVideo"
-                                class="text-sm font-medium text-gray-700 cursor-pointer select-none">تسجيل فيديو</label>
-                            <input type="number" id="countVideo" name="materialVideoCount" placeholder="العدد" disabled
-                                min="0"
-                                class="w-full p-2 text-sm border border-gray-300 rounded disabled:bg-gray-100 transition focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- اسلايدات -->
-                        <div
-                            class="flex items-center space-x-3 space-x-reverse bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition">
-                            <input type="checkbox" id="checkSlides" name="materialSlidesCheck"
-                                class="custom-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
-                                onchange="toggleCountInput(this, 'countSlides')">
-                            <label for="checkSlides"
-                                class="text-sm font-medium text-gray-700 cursor-pointer select-none">عرض تقديمي أو
-                                نص</label>
-                            <input type="number" id="countSlides" name="materialSlidesCount" placeholder="العدد"
-                                disabled min="0"
-                                class="w-full p-2 text-sm border border-gray-300 rounded disabled:bg-gray-100 transition focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- صوتي -->
-                        <div
-                            class="flex items-center space-x-3 space-x-reverse bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition">
-                            <input type="checkbox" id="checkAudio" name="materialAudioCheck"
-                                class="custom-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
-                                onchange="toggleCountInput(this, 'countAudio')">
-                            <label for="checkAudio"
-                                class="text-sm font-medium text-gray-700 cursor-pointer select-none">تسجيل صوتي</label>
-                            <input type="number" id="countAudio" name="materialAudioCount" placeholder="العدد" disabled
-                                min="0"
-                                class="w-full p-2 text-sm border border-gray-300 rounded disabled:bg-gray-100 transition focus:ring-green-500 focus:border-green-500">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- اسم الأستاذ -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">اسم الأستاذ (ثلاثي) <span
-                            class="text-red-500">*</span></label>
-                    <input type="text" id="professorNameInput" name="professorName" list="professors" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 transition duration-150"
-                        placeholder="ابحث عن اسم الأستاذ أو اكتبه...">
-                    <datalist id="professors">
-                        <!-- سيتم تعبئة الأسماء هنا بواسطة JavaScript -->
-                    </datalist>
-                </div>
-
-                <!-- التاريخ -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">تاريخ تدريس المحاضرة <span
-                            class="text-red-500">*</span></label>
-                    <input type="date" name="lectureDate" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <!-- طريقة التدريس -->
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">طريقة التدريس <span
-                            class="text-red-500">*</span></label>
-                    <div
-                        class="flex items-center space-x-4 space-x-reverse mt-1 p-3 border border-gray-300 rounded-lg bg-gray-50">
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="teachingMethod" value="حضوري" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-gray-700 font-medium">حضوري</span>
-                        </label>
-                        <label class="flex items-center space-x-2 space-x-reverse cursor-pointer">
-                            <input type="radio" name="teachingMethod" value="عن بعد" required
-                                class="custom-radio w-5 h-5 text-green-600 focus:ring-green-500">
-                            <span class="text-gray-700 font-medium">عن بعد</span>
-                        </label>
-                    </div>
-                </div>
-
-                <hr class="md:col-span-2 my-2 border-t border-gray-200">
-
-                <!-- المنسق (اختياري) -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">اسم منسق الفرقة <span
-                            class="text-gray-400 font-normal text-xs">(اختياري)</span></label>
-                    <input type="text" name="coordinatorName"
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <!-- هاتف المنسق (اختياري) -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">تلفون منسق الفرقة <span
-                            class="text-gray-400 font-normal text-xs">(اختياري)</span></label>
-                    <input type="tel" name="coordinatorPhone"
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
-                        placeholder="مثال: 05xxxxxxx">
-                </div>
-
-                <!-- ملاحظات (إجباري) -->
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">ملاحظات <span
-                            class="text-red-500">*</span></label>
-                    <textarea name="notes" rows="2" required
-                        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
-                        placeholder="أكتب ملاحظاتك هنا (أو اكتب 'لا يوجد' إذا لم تتوفر ملاحظات)..."></textarea>
-                </div>
-            </div>
-
-            <!-- زر الإرسال -->
-            <div class="mt-10 text-center">
-                <button type="submit" id="submitButton"
-                    class="w-full md:w-1/2 lg:w-1/3 py-4 px-6 bg-green-700 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-green-800 hover:shadow-xl transition duration-200 transform hover:-translate-y-1">
-                    تسجيل ومتابعة
-                </button>
-            </div>
-
-        </form>
     </div>
 
-    <script>
-        // قائمة الأسماء محدثة
-        const professorsList = [
-            "ماهر محمد شريف آدم", "مزمل ابنعوف القطبي سليمان", "كوثر إسحق فضل الله علي", "عمر أحمد علي مقبول", "عمر بلولة علي أحمد",
-            "مدثر فضل سيد يعقوب", "محمد عبد الرحمن عثمان السيد", "عبد المطلب إبراهيم عبد الله", "معتز عمر إسحق علي", "اشرف محمد سعد الدين",
-            "الشريف شريف طه", "نمارق حسين صالح فضيل", "بدرية موسى عبد الله حسيب", "ريم المهدي بشير محمد خير", "عبد الواحد متوكل الطيب",
-            "علاء الدين يحيى عثمان خليل", "محمد حبيب آدم محمد", "رواء رحمة الله محمد محمود", "تاج الدين موسى بخيت محمد", "إيمان الصديق الطيب إبراهيم",
-            "إسراء يعقوب عبد الحميد", "عكرمة عبد الغني عبد الفتاح", "آيات عبد الحي فضل محمد", "منار أحمد محمد حمزة", "محمد محمد عثمان مختار",
-            "صلاح علي حامد علي شلبي", "خالد محمد عثمان سعيد", "الصادق بشير حسن عباس", "بدر الدين حسن الطاهر", "احمد يوسف الصديق",
-            "إبراهيم عثمان نوح صالح", "محمد موسي علي عيسى", "رنا عباس محمد بابكر", "دعاء مجدي عيسى خليل", "أمل الهادي النور جابر",
-            "أروي احمد الطيب علي", "سامية إبراهيم أحمد الحسن", "إسلام داوود سليمان عبد الله", "خنساء عوض الكريم ميرغني", "عبد القادر أحمد فرج",
-            "عثمان الوسيلة الشيخ ادريس", "فاطمة الشيخ سيدأحمد خليل", "أنور مصطفى هلال", "بابكر قسم الله الشيخ مصطفى", "معاذ ادم الزين آدم",
-            "ادريس الحسن محمد التوم", "احمد علي الحاج عبد الرحمن", "سلمى ذو النون عبد النبي احمد", "يسرا التجاني محمد سليمان", "اسيا علي حسن الديراني",
-            "مديحة مهدي حسين"
-        ];
-
-        // تهيئة قائمة الأسماء
-        // تهيئة قائمة الأسماء
-        document.addEventListener('DOMContentLoaded', () => {
-            const dataListElement = document.getElementById('professors');
-
-            // فرز الأسماء أبجدياً لسهولة البحث
-            professorsList.sort((a, b) => a.localeCompare(b, 'ar'));
-
-            professorsList.forEach(name => {
-                const option = document.createElement('option');
-                option.value = name;
-                dataListElement.appendChild(option);
-            });
-        });
-
-
-
-        // قاعدة بيانات المقررات
-        const coursesData = {
-            "قسم علوم الحاسوب": {
-                "الأولى": {
-                    "الأول": [
-                        "القرآن الكريم والتجويد", "اللغة العربية", "اللغة الإنجليزية العامة", "الحسبان (Calculus)", "الرياضيات المتقطعة", "أساسيات الكهرباء", "أساسيات علوم الحاسوب", "مهارات الاتصال"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم والتجويد", "اللغة الإنجليزية", "العقيدة", "فقه العبادات", "الجبر والهندسة التحليلية", "الإحصاء والاحتمالات", "تطبيقات الحاسوب", "أساسيات الإلكترونيات", "أساسيات البرمجة"
-                    ]
-                },
-                "الثانية": {
-                    "الأول": [
-                        "القرآن الكريم والتجويد", "اللغة العربية", "الجبر الخطي", "تصميم النظم الرقمية", "هياكل البيانات والخوارزميات", "أساليب البرمجة 1", "مفاهيم قواعد البيانات"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم وتجويده", "التفسير", "فقه المعاملات", "اللغة الإنجليزية للأغراض الخاصة", "الإحصاء التطبيقي", "المعادلات التفاضلية", "أساليب البرمجة 2", "تحليل وتصميم النظم"
-                    ]
-                },
-                "الثالثة": {
-                    "الأول": [
-                        "الدعوة في الإسلام", "الحديث وعلومه", "التحليل العددي", "تنظيم وإدارة الملفات", "اتصال البيانات", "هندسة البرمجيات 1", "البرمجة المرئية", "الذكاء الاصطناعي"
-                    ],
-                    "الثاني": [
-                        "أصول الفقه ومقاصد الشريعة", "تقنيات الإنترنت 1", "المعالجات الدقيقة ولغة التجميع", "نظم الوسائط المتعددة", "النظم الذكية", "مفاهيم نظم التشغيل", "شبكات الحاسوب", "هندسة البرمجيات 2"
-                    ]
-                },
-                "الرابعة": {
-                    "الأول": [
-                        "تقنيات الإنترنت 2", "التفاعل بين الإنسان والحاسوب", "معمارية وتنظيم الحاسوب", "الرسم بالحاسوب", "التشفير ونظرية الأعداد", "النمذجة والمحاكاة"
-                    ],
-                    "الثاني": [
-                        "قضايا أخلاقية ومهنية", "أمن المعلومات والشبكات", "معالجة الصور الرقمية", "تطبيقات قواعد البيانات", "تصميم المترجمات", "طرق البحث"
-                    ]
-                },
-                "الخامسة": {
-                    "الأول": [
-                        "النظم الموزعة", "تحليل وتصميم الخوارزميات", "نظم التشغيل مفتوحة المصدر", "قواعد بيانات متقدمة", "مشروع تخرج في علوم الحاسوب 1", "مقرر اختياري 1", "مقرر اختياري 2", "مقرر اختياري 3", "نظم الوكالات الذكية (Intelligent Agents Systems)-أختياري", "الشبكات اللاسلكية (Wireless Networks)-أختياري", "الحوسبة السحابية (Cloud Computing)-أختياري", "تنقيب البيانات (Data Mining)-أختياري", "تطوير برمجيات الجوال (Mobile Software Development)-أختياري", "قواعد البيانات الموزعة (Distributed Databases)-أختياري"
-                    ],
-                    "الثاني": [
-                        "نظرية الحوسبة", "التوجهات الحديثة في علوم الحاسوب", "مشروع تخرج في علوم الحاسوب 2", "مقرر اختياري 2", "مقرر اختياري 3", "نظم الوكالات الذكية (Intelligent Agents Systems)-أختياري", "الشبكات اللاسلكية (Wireless Networks)-أختياري", "الحوسبة السحابية (Cloud Computing)-أختياري", "تنقيب البيانات (Data Mining)-أختياري", "تطوير برمجيات الجوال (Mobile Software Development)-أختياري", "قواعد البيانات الموزعة (Distributed Databases)-أختياري"
-                    ]
-                }
-            },
-            "قسم نظم المعلومات": {
-                "الأولى": {
-                    "الأول": [
-                        "القرآن الكريم وتجويده", "اللغة العربية", "اللغة الإنجليزية العامة", "الحسبان (Calculus)", "الرياضيات المتقطعة", "أساسيات علوم الحاسوب", "مبادئ محاسبة مالية", "مبادئ علم الإدارة", "مهارات الاتصال"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم وتجويده", "اللغة الإنجليزية", "العقيدة", "فقه العبادات", "مبادئ نظم المعلومات", "الإحصاء والاحتمالات", "الجبر والهندسة التحليلية", "الحزم التطبيقية", "أساسيات البرمجة"
-                    ]
-                },
-                "الثانية": {
-                    "الأول": [
-                        "القرآن الكريم وتجويده", "اللغة العربية", "الجبر الخطي", "بحوث العمليات", "تصميم النظم الرقمية", "قواعد البيانات (1)", "هياكل البيانات والخوارزميات", "أساليب البرمجة (1)", "نظم معلومات إدارية"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم وتجويده", "التفسير", "فقه المعاملات", "اللغة الإنجليزية للأغراض الخاصة", "بحوث العمليات", "أساليب البرمجة (2)", "تحليل وتصميم النظم (1)", "التحليل الإحصائي", "المعادلات التفاضلية"
-                    ]
-                },
-                "الثالثة": {
-                    "الأول": [
-                        "الدعوة في الإسلام", "الحديث وعلومه", "تنظيم وإدارة الملفات", "نظم معلومات محاسبية", "هندسة البرمجيات 1", "تحليل وتصميم النظم (2)", "البرمجة المرئية", "الذكاء الاصطناعي"
-                    ],
-                    "الثاني": [
-                        "أصول الفقه ومقاصد الشريعة", "تقنيات الإنترنت (1)", "نظم الوسائط المتعددة", "قضايا مهنية وأخلاقية", "قواعد البيانات (2)", "مفاهيم نظم التشغيل", "هندسة البرمجيات 2", "مفاهيم شبكات الحاسوب"
-                    ]
-                },
-                "الرابعة": {
-                    "الأول": [
-                        "تقنيات الإنترنت (2)", "مفاهيم برمجية", "معمارية وتنظيم الحاسوب", "التشفير ونظرية الأعداد", "إدارة المشاريع", "نظم دعم القرار", "النمذجة والمحاكاة"
-                    ],
-                    "الثاني": [
-                        "نظم معلومات جغرافية (1)", "أمن المعلومات والشبكات", "برمجة النظم التجارية", "النظم الذكية", "برمجة الهواتف النقالة", "طرق البحث"
-                    ]
-                },
-                "الخامسة": {
-                    "الأول": [
-                        "نظم معلومات جغرافية (2)", "تقنيات الإنترنت (3)", "النظم الموزعة", "تنقيب البيانات", "بحث التخرج 1", "استراتيجيات تطوير النظم - اختياري", "تطبيقات الحاسوب في الأعمال - اختياري", "الاتجاهات الحديثة في نمذجة البيانات -ختياري"
-                    ],
-                    "الثاني": [
-                        "التجارة الإلكترونية", "إدارة الموارد البشرية", "الشبكات اللاسلكية", "قواعد البيانات 3", "بحث التخرج 2", "استراتيجيات تطوير النظم - اختياري", "تطبيقات الحاسوب في الأعمال - اختياري", "الاتجاهات الحديثة في نمذجة البيانات -ختياري", "مهارات الاتصال -ختياري"
-                    ]
-                }
-            },
-
-            "قسم تقانة المعلومات": {
-                "الأولى": {
-                    "الأول": [
-                        "القرآن الكريم وتجويده",
-                        "اللغة العربية",
-                        "اللغة الإنجليزية العامة",
-                        "مهارات الاتصال",
-                        "أساسيات علوم الحاسوب",
-                        "الحسبان (Calculus)",
-                        "رياضيات متقطعة",
-                        "إدارة وإستخدام نظم التشغيل 1",
-                        "تطبيقات الحاسوب 1"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم وتجويده",
-                        "اللغة الانجليزية",
-                        "العقيدة",
-                        "فقه العبادات",
-                        "أساسيات البرمجة",
-                        "الجبر والهندسة التحليلية",
-                        "مبادئ علم الإدارة",
-                        "إدارة وإستخدام نظم التشغيل II",
-                        "تطبيقات الحاسوب II"
-                    ]
-                },
-                "الثانية": {
-                    "الأول": [
-                        "القرآن الكريم وتجويده",
-                        "اللغة العربية",
-                        "أساليب البرمجة",
-                        "هياكل البيانات والخوارزميات",
-                        "الإحصاء والإحتمالات",
-                        "مبادئ الأنترنت وتطبيقاته",
-                        "مفاهيم قواعد البيانات",
-                        "أساسيات الكهرباء والإلكترونيات",
-                        "مبادئ نظم وتقانة المعلومات"
-                    ],
-                    "الثاني": [
-                        "القرآن الكريم وتجويده",
-                        "التفسير",
-                        "فقه المعاملات",
-                        "مبادئ الاقتصاد",
-                        "الإحصاء التطبيقي",
-                        "أساليب البرمجة II",
-                        "نظم إدارة قواعد البيانات",
-                        "لغة انجليزية للأغراض الخاصة",
-                        "مبادئ المحاسبة",
-                        "تحليل وتصميم النظم"
-                    ]
-                },
-                "الثالثة": {
-                    "الأول": [
-                        "الدعوة في الاسلام",
-                        "الحديث وعلومه",
-                        "هندسة البرمجيات 1",
-                        "تطبيقات قواعد البيانات",
-                        "الذكاء الإصطناعي",
-                        "تنظيم وإدارة الملفات",
-                        "مبادئ التسويق",
-                        "البرمجة المرئية"
-                    ],
-                    "الثاني": [
-                        "أصول الفقه ومقاصد الشريعة",
-                        "اتصال البيانات",
-                        "تقنيات الانترنت 1",
-                        "هندسة البرمجيات II",
-                        "مفاهيم نظم التشغيل",
-                        "نظم الوسائط المتعددة"
-                    ]
-                },
-                "الرابعة": {
-                    "الأول": [
-                        "تقنيات إنترنت II",
-                        "التفاعل بين الانسان والحاسوب",
-                        "شبكات الحاسوب",
-                        "الأعمال الالكترونية",
-                        "النمذجة والمحاكاة",
-                        "نظم التشغيل مفتوحة المصدر",
-                        "إدارة مشاريع"
-                    ],
-                    "الثاني": [
-                        "قضايا أخلاقية مهنية",
-                        "قواعد بيانات متقدمة",
-                        "طرق البحث",
-                        "أمن المعلومات",
-                        "التجارة الإلكترونية",
-                        "إدارة شبكات الحاسوب"
-                    ]
-                },
-                "الخامسة": {
-                    "الأول": [
-                        "تقنيات الإنترنت 3",
-                        "الشبكات اللاسلكية والحوسبة المتنقلة",
-                        "الحوسبة السحابية",
-                        "تنقيب البيانات",
-                        "مشروع التخرج 1",
-                        "مقرر إختياري"
-                    ],
-                    "الثاني": [
-                        "مخدمات الشبكات",
-                        "التوجهات الحديثة في تقنية المعلومات",
-                        "نظم تخطيط ادارة المؤسسات",
-                        "نظم الوسائط المتعددة المتقدمة",
-                        "أمن شبكات الحاسوب",
-                        "مشروع التخرج II",
-                        "نظم تخطيط ادارة المؤسسات",
-                        "نظم الوسائط المتعددة المتقدمة",
-                        "أمن شبكات الحاسوب"
-                    ]
-                }
-            }
-        };
-
-
-        const departmentSelect = document.getElementById('department');
-        const levelSelect = document.getElementById('level');
-        const semesterSelect = document.getElementById('semester');
-        const courseSelect = document.getElementById('courseName');
-
-        function updateCourseOptions() {
-            const deptValue = departmentSelect.value;
-            const levelValue = levelSelect.value;
-            const semesterValue = semesterSelect.value;
-            courseSelect.innerHTML = '<option value="" disabled selected>اختر المقرر</option>';
-            if (!deptValue || !levelValue || !semesterValue) {
-                courseSelect.innerHTML = '<option value="" disabled selected>اختر القسم والفرقة والفصل أولاً</option>';
-                return;
-            }
-            let courses = [];
-            if (coursesData[deptValue] && coursesData[deptValue][levelValue] && coursesData[deptValue][levelValue][semesterValue]) {
-                courses = coursesData[deptValue][levelValue][semesterValue];
-            }
-            if (courses.length > 0) {
-                courses.forEach(course => {
-                    const option = document.createElement('option');
-                    option.value = course;
-                    option.textContent = course;
-                    courseSelect.appendChild(option);
-                });
-            } else {
-                const option = document.createElement('option');
-                option.textContent = "لا توجد مقررات مسجلة لهذا الفصل في قاعدة البيانات";
-                option.disabled = true;
-                courseSelect.appendChild(option);
-            }
-        }
-
-        departmentSelect.addEventListener('change', updateCourseOptions);
-        levelSelect.addEventListener('change', updateCourseOptions);
-        semesterSelect.addEventListener('change', updateCourseOptions);
-
-        const form = document.getElementById('lectureForm');
-        const submitButton = document.getElementById('submitButton');
-        const messageBox = document.getElementById('message-box');
-
-        window.toggleCountInput = function (checkbox, inputId) {
-            const input = document.getElementById(inputId);
-            if (checkbox.checked) {
-                input.disabled = false;
-                input.focus();
-            } else {
-                input.disabled = true;
-                input.value = '';
-            }
-        };
-
-        // ***************************************************************
-        // تنبيه: استبدل الرابط أدناه بالرابط الجديد الخاص بك بعد النشر
-        // ***************************************************************
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTk4Mc7sIQiC2c88w1vx3KRn1ITzYaKrpwLGzqO6pLbF0bf5iGjHspSYr8yCRO7bhvVg/exec';
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // التحقق اليدوي الإضافي (للتأكد من المتصفحات القديمة)
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="animate-pulse">جاري الإرسال...</span>';
-            submitButton.classList.add('opacity-70', 'cursor-not-allowed');
-
-            const formData = new FormData(form);
-            formData.append('timestamp', new Date().toLocaleString('ar-SA'));
-
-
-
-            try {
-                if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('---')) {
-                    throw new Error('الرجاء تحديث رابط Google Apps Script في الكود.');
-                }
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    const professorName = document.getElementById('professorNameInput').value;
-                    showMessage('success', `شكراً لك يا أستاذ ${professorName}، تم تسجيل البيانات بنجاح!`);
-                    form.reset();
-                    // إعادة ضبط العناصر التفاعلية
-                    document.getElementById('countVideo').disabled = true;
-                    document.getElementById('countSlides').disabled = true;
-                    document.getElementById('countAudio').disabled = true;
-                    courseSelect.innerHTML = '<option value="" disabled selected>اختر القسم والفرقة والفصل أولاً</option>';
-                } else {
-                    throw new Error(result.message || 'حدث خطأ غير معروف من الخادم');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showMessage('error', 'فشل الإرسال. تأكد من الاتصال بالإنترنت أو صحة الرابط.');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'تسجيل ومتابعة';
-                submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
-            }
-        });
-
-        function showMessage(type, message) {
-            messageBox.textContent = message;
-            messageBox.classList.remove('hidden');
-            if (type === 'success') {
-                messageBox.className = 'p-4 mb-4 rounded-lg text-white text-center bg-green-600 shadow-lg';
-            } else {
-                messageBox.className = 'p-4 mb-4 rounded-lg text-white text-center bg-red-600 shadow-lg';
-            }
-            setTimeout(() => {
-                messageBox.classList.add('hidden');
-            }, 5000);
-        }
-    </script>
 </body>
 
 </html>
