@@ -226,36 +226,6 @@
 
     </div>
 
-    <script>
-        // Check for user session
-        document.addEventListener('DOMContentLoaded', () => {
-            const userStr = localStorage.getItem('user');
-            if (!userStr) {
-                window.location.href = 'login.html';
-                return;
-            }
-
-            const user = JSON.parse(userStr);
-
-            // Create User Profile UI
-            const header = document.querySelector('header');
-            const profileDiv = document.createElement('div');
-            profileDiv.className = 'user-profile';
-            profileDiv.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: flex-end; gap: 1rem; margin-bottom: 1rem;">
-                    <span style="font-weight: 500;">مرحباً، ${user.name}</span>
-                    <img src="${user.picture}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%;">
-                    <button onclick="logout()" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 0.5rem; cursor: pointer;">تسجيل خروج</button>
-                </div>
-            `;
-            header.insertBefore(profileDiv, header.firstChild);
-        });
-
-        function logout() {
-            localStorage.removeItem('user');
-            window.location.href = 'login.html';
-        }
-    </script>
 </body>
 
 </html>
